@@ -45,4 +45,13 @@ android {
         debug.setRoot('build-types/debug')
         release.setRoot('build-types/release')
     }
+
+    defaultConfig{
+        applicationId "com.u17od.upm"
+        minSdkVersion 3
+        targetSdkVersion 21
+
+        versionName "1.14"
+        versionCode 15
+    }
 }
