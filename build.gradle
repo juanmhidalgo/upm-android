@@ -48,10 +48,14 @@ android {
 
     defaultConfig{
         applicationId "com.u17od.upm"
-        minSdkVersion 3
+        minSdkVersion 17
         targetSdkVersion 21
 
         versionName "1.14"
         versionCode 15
+    }
+
+    dependencies{
+        compile 'com.android.support:appcompat-v7:21.0.3'
     }
 }
