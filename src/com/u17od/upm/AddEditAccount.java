@@ -20,7 +20,6 @@
  */
 package com.u17od.upm;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -36,8 +35,9 @@ import android.widget.Toast;
 
 import com.u17od.upm.database.AccountInformation;
 import com.u17od.upm.database.PasswordDatabase;
+import com.u17od.upm.ui.base.BaseActivity;
 
-public class AddEditAccount extends Activity implements OnClickListener {
+public class AddEditAccount extends BaseActivity implements OnClickListener {
 
     private static final int GENERIC_ERROR_DIALOG = 1;
 
@@ -65,9 +65,8 @@ public class AddEditAccount extends Activity implements OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (Utilities.VERSION.SDK_INT >= Utilities.VERSION_CODES.HONEYCOMB) {
-            getWindow().setFlags(LayoutParams.FLAG_SECURE, LayoutParams.FLAG_SECURE);
-        }
+        getWindow().setFlags(LayoutParams.FLAG_SECURE, LayoutParams.FLAG_SECURE);
+
         setContentView(R.layout.add_edit_account_details);
 
         saveButton = (Button) findViewById(R.id.save_button);

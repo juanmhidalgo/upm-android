@@ -20,10 +20,6 @@
  */
 package com.u17od.upm;
 
-import java.io.IOException;
-import java.security.GeneralSecurityException;
-
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -37,8 +33,12 @@ import android.widget.Toast;
 import com.u17od.upm.crypto.InvalidPasswordException;
 import com.u17od.upm.database.PasswordDatabase;
 import com.u17od.upm.database.ProblemReadingDatabaseFile;
+import com.u17od.upm.ui.base.BaseActivity;
 
-public class ChangeMasterPassword extends Activity implements OnClickListener {
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+
+public class ChangeMasterPassword extends BaseActivity implements OnClickListener {
 
     private EditText existingPassword;
     private EditText newPassword;
@@ -80,7 +80,7 @@ public class ChangeMasterPassword extends Activity implements OnClickListener {
     }
 
     private PasswordDatabase getPasswordDatabase() {
-        return ((UPMApplication) getApplication()).getPasswordDatabase();
+        return UPMApplication.getInstance().getPasswordDatabase();
     }
 
     public class DecryptAndSaveDatabaseAsyncTask extends AsyncTask<Void, Void, Integer> {

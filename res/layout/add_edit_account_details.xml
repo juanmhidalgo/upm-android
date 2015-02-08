@@ -1,93 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:orientation="vertical">
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
 
-     <ScrollView 
-        android:layout_width="fill_parent"
-        android:layout_height="1px"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
         android:fillViewport="true">
 
-        <LinearLayout android:layout_width="fill_parent"
-                      android:layout_height="fill_parent"
-                      android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/account_name"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/account_name"/>
 
-        <EditText android:id="@+id/account_name" 
-                  android:layout_width="fill_parent" 
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:layout_marginBottom="10dip"/>
+            <EditText
+                android:id="@+id/account_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:singleLine="true"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/userid"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/userid"/>
 
-        <EditText android:id="@+id/account_userid" 
-                  android:layout_width="fill_parent" 
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:layout_marginBottom="10dip"/>
+            <EditText
+                android:id="@+id/account_userid"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:singleLine="true"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/password"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/password"/>
 
-        <EditText android:id="@+id/account_password" 
-                  android:layout_width="fill_parent" 
-                  android:layout_height="wrap_content"
-                  android:inputType="textVisiblePassword"
-                  android:layout_marginBottom="10dip"/>
+            <EditText
+                android:id="@+id/account_password"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:inputType="textVisiblePassword"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/url"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/url"/>
 
-        <EditText android:id="@+id/account_url"
-                  android:layout_width="fill_parent" 
-                  android:layout_height="wrap_content"
-                  android:singleLine="true"
-                  android:layout_marginBottom="10dip"/>
+            <EditText
+                android:id="@+id/account_url"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:inputType="textUri"
+                android:singleLine="true"/>
 
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="@string/notes"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notes"/>
 
-        <EditText android:id="@+id/account_notes"
-                  android:layout_width="fill_parent" 
-                  android:layout_height="wrap_content"
-                  android:inputType="textMultiLine"
-                  android:layout_marginBottom="10dip"
-                  android:lines="3"/>
+            <EditText
+                android:id="@+id/account_notes"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dip"
+                android:inputType="textMultiLine"
+                android:lines="3"/>
 
         </LinearLayout>
 
-    </ScrollView> 
+    </ScrollView>
 
     <LinearLayout
+        style="?android:attr/buttonBarStyle"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        style="@android:style/ButtonBar">
+        android:orientation="horizontal">
 
-        <Button android:id="@+id/save_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/save"
-                style="@android:style/Widget.Button"
-                android:layout_weight="1"/>
-
-        <Button android:id="@+id/cancel_button"
+        <Button
+            android:id="@+id/save_button"
+            style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/cancel"
-            style="@android:style/Widget.Button"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:text="@string/save"/>
+
+        <Button
+            android:id="@+id/cancel_button"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/cancel"/>
 
     </LinearLayout>
 

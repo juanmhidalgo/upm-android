@@ -41,8 +41,9 @@ import android.widget.EditText;
 import com.u17od.upm.database.PasswordDatabase;
 import com.u17od.upm.transport.HTTPTransport;
 import com.u17od.upm.transport.TransportException;
+import com.u17od.upm.ui.base.BaseActivity;
 
-public class DownloadRemoteDatabase extends Activity implements OnClickListener {
+public class DownloadRemoteDatabase extends BaseActivity implements OnClickListener {
 
     private static final int ENTER_PW_REQUEST_CODE = 111;
 

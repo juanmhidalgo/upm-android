@@ -14,9 +14,10 @@ import android.util.Log;
 import com.u17od.upm.crypto.InvalidPasswordException;
 import com.u17od.upm.database.PasswordDatabase;
 import com.u17od.upm.database.ProblemReadingDatabaseFile;
+import com.u17od.upm.ui.base.BaseActivity;
 
 
-public abstract class SyncDatabaseActivity extends Activity {
+public abstract class SyncDatabaseActivity extends BaseActivity {
 
     private static final int ENTER_PW_REQUEST_CODE = 222;
     public static final int SYNC_DB_REQUEST_CODE = 226;
