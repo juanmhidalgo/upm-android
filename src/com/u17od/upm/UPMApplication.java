@@ -41,9 +41,17 @@ import com.u17od.upm.database.PasswordDatabase;
  */
 public class UPMApplication extends Application {
 
+    private static UPMApplication sIntance;
     private PasswordDatabase passwordDatabase;
     private Date timeOfLastSync;
-    
+
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        sIntance = this;
+    }
+
     public Date getTimeOfLastSync() {
         return timeOfLastSync;
     }
@@ -119,6 +127,10 @@ public class UPMApplication extends Application {
     protected void deleteDatabase(Activity activity) {
         Utilities.getDatabaseFile(activity).delete();
         Utilities.setDatabaseFileName(null, activity);
+    }
+
+    public static UPMApplication getInstance(){
+        return sIntance;
     }
 
 }
