@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -15,75 +16,98 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
+            <com.u17od.upm.ui.widgets.FloatLabelLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/account_name"/>
+                app:floatLabelTextAppearance="@style/TextAppearance.UPM.FloatLabel">
 
-            <EditText
-                android:id="@+id/account_name"
-                android:layout_width="fill_parent"
+                <EditText
+                    android:id="@+id/account_name"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dip"
+                    android:hint="@string/account_name"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:nextFocusDown="@+id/account_userid"
+                    android:singleLine="true"/>
+
+            </com.u17od.upm.ui.widgets.FloatLabelLayout>
+
+
+            <com.u17od.upm.ui.widgets.FloatLabelLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:singleLine="true"/>
+                app:floatLabelTextAppearance="@style/TextAppearance.UPM.FloatLabel">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/account_userid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dip"
+                    android:hint="@string/userid"
+                    android:imeOptions="actionNext"
+                    android:inputType="textNoSuggestions"
+                    android:nextFocusDown="@+id/account_password"
+                    android:singleLine="true"/>
+            </com.u17od.upm.ui.widgets.FloatLabelLayout>
+
+            <com.u17od.upm.ui.widgets.FloatLabelLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/userid"/>
+                app:floatLabelTextAppearance="@style/TextAppearance.UPM.FloatLabel">
 
-            <EditText
-                android:id="@+id/account_userid"
-                android:layout_width="fill_parent"
+                <EditText
+                    android:id="@+id/account_password"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dip"
+                    android:hint="@string/password"
+                    android:imeOptions="actionNext"
+                    android:inputType="textVisiblePassword"
+                    android:nextFocusDown="@+id/account_url"/>
+            </com.u17od.upm.ui.widgets.FloatLabelLayout>
+
+            <com.u17od.upm.ui.widgets.FloatLabelLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:singleLine="true"/>
+                app:floatLabelTextAppearance="@style/TextAppearance.UPM.FloatLabel">
 
-            <TextView
-                android:layout_width="wrap_content"
+                <EditText
+                    android:id="@+id/account_url"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dip"
+                    android:hint="@string/url"
+                    android:imeOptions="actionNext"
+                    android:inputType="textUri"
+                    android:nextFocusDown="@+id/account_notes"
+                    android:singleLine="true"/>
+
+            </com.u17od.upm.ui.widgets.FloatLabelLayout>
+
+            <com.u17od.upm.ui.widgets.FloatLabelLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/password"/>
+                app:floatLabelTextAppearance="@style/TextAppearance.UPM.FloatLabel">
 
-            <EditText
-                android:id="@+id/account_password"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:inputType="textVisiblePassword"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/url"/>
-
-            <EditText
-                android:id="@+id/account_url"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:inputType="textUri"
-                android:singleLine="true"/>
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/notes"/>
-
-            <EditText
-                android:id="@+id/account_notes"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dip"
-                android:inputType="textMultiLine"
-                android:lines="3"/>
-
+                <EditText
+                    android:id="@+id/account_notes"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dip"
+                    android:hint="@string/notes"
+                    android:imeOptions="actionDone"
+                    android:inputType="textMultiLine"
+                    android:lines="3"/>
+            </com.u17od.upm.ui.widgets.FloatLabelLayout>
         </LinearLayout>
 
     </ScrollView>
 
     <LinearLayout
         style="?android:attr/buttonBarStyle"
-        android:layout_width="fill_parent"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 

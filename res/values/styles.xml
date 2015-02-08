@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    </style>
 
-  </style>
+    <style name="TextAppearance.UPM.FloatLabel" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@color/float_label</item>
+        <item name="android:textSize">12sp</item>
+    </style>
   <style name="Theme.Transparent" parent="android:Theme">
     <item name="android:windowIsTranslucent">true</item>
     <item name="android:windowBackground">@android:color/transparent</item>
