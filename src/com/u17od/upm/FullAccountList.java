@@ -20,12 +20,6 @@
  */
 package com.u17od.upm;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -43,9 +37,16 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.u17od.upm.ui.fragments.AccountListFragment;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 
 public class FullAccountList extends AccountsList {
 
@@ -64,39 +65,12 @@ public class FullAccountList extends AccountsList {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        registerForContextMenu(getListView());
-        populateAccountList();
-    }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        switch(requestCode) {
-            case AddEditAccount.EDIT_ACCOUNT_REQUEST_CODE:
-            case ViewAccountDetails.VIEW_ACCOUNT_REQUEST_CODE:
-                if (resultCode == AddEditAccount.EDIT_ACCOUNT_RESULT_CODE_TRUE) {
-                    populateAccountList();
-                }
-                break;
-            case SyncDatabaseActivity.SYNC_DB_REQUEST_CODE:
-                if (resultCode == SyncDatabaseActivity.RESULT_REFRESH) {
-                    populateAccountList();
-                }
-                break;
+        if(savedInstanceState == null){
+            getSupportFragmentManager().beginTransaction().add(android.R.id.content, new AccountListFragment()).commit();
         }
     }
 
-    private void populateAccountList() {
-        if (getPasswordDatabase() == null) {
-            // If the UPM process was restarted since AppEntryActivity was last
-            // run then databaseFileToDecrypt won't be set so set it here.
-            EnterMasterPassword.databaseFileToDecrypt = Utilities.getDatabaseFile(this);
-
-            setResult(RESULT_ENTER_PW);
-            finish();
-        } else {
-            setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, getPasswordDatabase().getAccountNames()));
-        }
-    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -157,15 +131,15 @@ public class FullAccountList extends AccountsList {
                 onSearchRequested();
                 optionConsumed = true;
                 break;
-            case R.id.add:
-                if (Utilities.isSyncRequired(this)) {
-                    UIUtilities.showToast(this, R.string.sync_required);
-                } else {
-                    Intent i = new Intent(FullAccountList.this, AddEditAccount.class);
-                    i.putExtra(AddEditAccount.MODE, AddEditAccount.ADD_MODE);
-                    startActivityForResult(i, AddEditAccount.EDIT_ACCOUNT_REQUEST_CODE);
-                }
-                break;
+//            case R.id.add:
+//                if (Utilities.isSyncRequired(this)) {
+//                    UIUtilities.showToast(this, R.string.sync_required);
+//                } else {
+//                    Intent i = new Intent(FullAccountList.this, AddEditAccount.class);
+//                    i.putExtra(AddEditAccount.MODE, AddEditAccount.ADD_MODE);
+//                    startActivityForResult(i, AddEditAccount.EDIT_ACCOUNT_REQUEST_CODE);
+//                }
+//                break;
             case R.id.change_master_password:
                 if (Utilities.isSyncRequired(this)) {
                     UIUtilities.showToast(this, R.string.sync_required);

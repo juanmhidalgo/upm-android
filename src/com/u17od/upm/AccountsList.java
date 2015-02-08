@@ -20,24 +20,24 @@
  */
 package com.u17od.upm;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.ClipboardManager;
 import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ContextMenu.ContextMenuInfo;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.AdapterContextMenuInfo;
 
 import com.u17od.upm.database.AccountInformation;
 import com.u17od.upm.database.PasswordDatabase;
+import com.u17od.upm.ui.base.BaseActivity;
 
-public class AccountsList extends ListActivity {
+public class AccountsList extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -105,17 +105,6 @@ public class AccountsList extends ListActivity {
         }
     }
 
-    private void viewAccount(AccountInformation ai) {
-        // Pass the AccountInformation object o the AccountDetails Activity by
-        // way of a static variable on that class. I really don't like this but
-        // it seems like the best way of doing it
-        // @see http://developer.android.com/guide/appendix/faq/framework.html#3
-        ViewAccountDetails.account = ai;
-
-        Intent i = new Intent(AccountsList.this, ViewAccountDetails.class);
-        startActivityForResult(i, ViewAccountDetails.VIEW_ACCOUNT_REQUEST_CODE);
-    }
-
     private void editAccount(AccountInformation ai) {
         if (Utilities.isSyncRequired(this)) {
             UIUtilities.showToast(this, R.string.sync_required);
@@ -127,13 +116,6 @@ public class AccountsList extends ListActivity {
                 startActivityForResult(i, AddEditAccount.EDIT_ACCOUNT_REQUEST_CODE);
             }
         }
-    }
-
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        // Get the name of the account the user selected
-        TextView itemSelected = (TextView) v;
-        viewAccount(getPasswordDatabase().getAccount(itemSelected.getText().toString()));
     }
 
     protected PasswordDatabase getPasswordDatabase() {

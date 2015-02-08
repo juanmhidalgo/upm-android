@@ -20,12 +20,10 @@
  */
 package com.u17od.upm;
 
-import java.util.ArrayList;
-
 import android.app.SearchManager;
-import android.content.Intent;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
+
+import com.u17od.upm.ui.fragments.AccountListFragment;
 
 public class SearchResults extends AccountsList {
 
@@ -33,7 +31,11 @@ public class SearchResults extends AccountsList {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_results);
-        registerForContextMenu(getListView());
+
+        if(savedInstanceState == null){
+            String query = getIntent().getStringExtra(SearchManager.QUERY);
+            getSupportFragmentManager().beginTransaction().add(android.R.id.content, AccountListFragment.newInstance(query)).commit();
+        }
     }
 
     @Override
@@ -43,38 +45,5 @@ public class SearchResults extends AccountsList {
         return false;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        // If the pw database is null then just close the activity.
-        if (getPasswordDatabase() == null) {
-            finish();
-        } else {
-            doSearch();
-        }
-    }
-
-    private void doSearch() {
-        final Intent queryIntent = getIntent();
-        final String queryAction = queryIntent.getAction();
-        if (Intent.ACTION_SEARCH.equals(queryAction)) {
-            filterAccountsList(queryIntent.getStringExtra(SearchManager.QUERY));
-        }
-    }
-
-    private void filterAccountsList(String textToFilterOn) {
-        ArrayList<String> allAccountNames = getPasswordDatabase().getAccountNames(); 
-        ArrayList<String> filteredAccountNames = new ArrayList<String>();
-        String textToFilterOnLC = textToFilterOn.toLowerCase();
-        
-        // Loop through all the accounts and pick out those that match the search string
-        for (String accountName : allAccountNames) {
-            if (accountName.toLowerCase().indexOf(textToFilterOnLC) > -1) {
-                filteredAccountNames.add(accountName);
-            }
-        }
-
-        setListAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, filteredAccountNames));
-    }
 
 }
