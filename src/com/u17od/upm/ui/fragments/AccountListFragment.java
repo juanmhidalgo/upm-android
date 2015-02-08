@@ -130,7 +130,6 @@ public class AccountListFragment extends ListFragment {
                 filteredAccountNames.add(accountName);
             }
         }
-        //TODO Move to fragments
         setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, filteredAccountNames));
     }
 
