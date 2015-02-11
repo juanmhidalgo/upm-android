@@ -31,7 +31,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.u17od.upm.database.AccountInformation;
 import com.u17od.upm.database.PasswordDatabase;
@@ -56,16 +55,16 @@ public class AccountsList extends BaseActivity {
         AdapterContextMenuInfo info = (AdapterContextMenuInfo) item.getMenuInfo();
         switch (item.getItemId()) {
         case R.id.edit_account:
-            editAccount(getAccount(info.targetView));
+            editAccount(getAccount(info.targetView, info.position));
             return true;
         case R.id.copy_username:
-            setClipboardText(getUsername(getAccount(info.targetView)));
+            setClipboardText(getUsername(getAccount(info.targetView, info.position)));
             return true;
         case R.id.copy_password:
-            setClipboardText(getPassword(getAccount(info.targetView)));
+            setClipboardText(getPassword(getAccount(info.targetView, info.position)));
             return true;
         case R.id.launch_url:
-            launchURL(getURL(getAccount(info.targetView)));
+            launchURL(getURL(getAccount(info.targetView, info.position)));
             return true;
         }
         return super.onContextItemSelected(item);
@@ -76,8 +75,9 @@ public class AccountsList extends BaseActivity {
         clipboardManager.setText(text);
     }
 
-    private AccountInformation getAccount(View listviewItem) {
-        return getPasswordDatabase().getAccount(((TextView) listviewItem).getText().toString());
+    private AccountInformation getAccount(View listviewItem, int position) {
+        ListView lv = (ListView) listviewItem.getParent();
+        return (AccountInformation) lv.getAdapter().getItem(position);
     }
 
     private String getUsername(AccountInformation account) {
