@@ -2,13 +2,17 @@ package com.u17od.upm.ui.fragments;
 
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ListFragment;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -26,6 +30,8 @@ import com.u17od.upm.database.AccountInformation;
 import com.u17od.upm.database.PasswordDatabase;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by juan on 4/02/15.
@@ -115,22 +121,22 @@ public class AccountListFragment extends ListFragment {
             getActivity().setResult(FullAccountList.RESULT_ENTER_PW);
             getActivity().finish();
         } else {
-            setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, db.getAccountNames()));
+            setListAdapter(new MyAdapter(getActivity(), R.layout.account_list_item, db.getAccounts()));
         }
     }
 
     private void filterAccountsList(String textToFilterOn) {
-        ArrayList<String> allAccountNames = UPMApplication.getInstance().getPasswordDatabase().getAccountNames();
-        ArrayList<String> filteredAccountNames = new ArrayList<String>();
+        List<AccountInformation> accounts = UPMApplication.getInstance().getPasswordDatabase().getAccounts();
+        List<AccountInformation> filtered = new ArrayList<>();
         String textToFilterOnLC = textToFilterOn.toLowerCase();
 
-        // Loop through all the accounts and pick out those that match the search string
-        for (String accountName : allAccountNames) {
-            if (accountName.toLowerCase().indexOf(textToFilterOnLC) > -1) {
-                filteredAccountNames.add(accountName);
+
+        for(AccountInformation accountInformation: accounts){
+            if(accountInformation.getAccountName().toLowerCase(Locale.getDefault()).contains(textToFilterOnLC)){
+                filtered.add(accountInformation);
             }
         }
-        setListAdapter(new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, filteredAccountNames));
+        setListAdapter(new MyAdapter(getActivity(), R.layout.account_list_item, filtered));
     }
 
     private void viewAccount(AccountInformation ai) {
@@ -164,7 +170,44 @@ public class AccountListFragment extends ListFragment {
 
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
-        TextView itemSelected = (TextView) v;
-        viewAccount(UPMApplication.getInstance().getPasswordDatabase().getAccount(itemSelected.getText().toString()));
+        viewAccount((AccountInformation) l.getAdapter().getItem(position));
+    }
+
+    private class MyAdapter extends ArrayAdapter<AccountInformation> {
+        private final int mResource;
+        final Context mContext;
+
+        private MyAdapter(Context context, int resource, List<AccountInformation> objects) {
+            super(context, resource, objects);
+            mResource = resource;
+            mContext = context;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            View v;
+            Placeholder placeholder;
+            if(convertView == null){
+                v = LayoutInflater.from(mContext).inflate(mResource, parent, false);
+                placeholder = new Placeholder(v);
+
+                v.setTag(placeholder);
+            }else{
+                v = convertView;
+                placeholder = (Placeholder) v.getTag();
+            }
+
+            AccountInformation info = getItem(position);
+            placeholder.accountName.setText(info.getAccountName());
+            return v;
+        }
+    }
+
+    private static class Placeholder{
+        public TextView accountName;
+
+        private Placeholder(@NonNull View rootView) {
+            accountName = (TextView) rootView.findViewById(R.id.account_name);
+        }
     }
 }
